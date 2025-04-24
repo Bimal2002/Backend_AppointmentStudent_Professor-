@@ -73,7 +73,7 @@ router.post('/login', async (req, res) => {
 
         // Validate input
         if (!email || !password) {
-            return res.status(400).json({ message: 'All fields are required' });
+            return res.status(400).json({ message: 'Email and password are required' });
         }
 
         // Check if user exists
@@ -122,6 +122,9 @@ router.post('/login', async (req, res) => {
 router.get('/verify', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
         res.json(user);
     } catch (error) {
         console.error('Error in verify:', error);
