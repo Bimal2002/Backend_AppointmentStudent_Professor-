@@ -54,3 +54,4 @@ Thumbs.db
 
 # Yarn Integrity file
 .yarn-integrity 
+.vercel
